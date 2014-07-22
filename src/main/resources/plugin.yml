@@ -1,0 +1,12 @@
+name: TosoGame3
+version: 1.0-SNAPSHOT
+description: This is a simple Bukkit Plugin
+author: MiyanoPeko
+
+main: com.tosogame.third.tosogame3.Main
+
+commands:
+  Hello:
+    description: Shows a hello message to the player
+    usage: |
+      /<command> shows a hello message to the player

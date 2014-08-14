@@ -6,6 +6,9 @@
 
 package com.tosogame.third.tosogame3.api;
 
+import java.util.ArrayList;
+import java.util.List;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scoreboard.Team;
@@ -16,13 +19,15 @@ import org.bukkit.scoreboard.Team;
  */
 public interface TosoItem {
     
+    List<Team> list = new ArrayList();
     Player player = null;
+    ItemStack item = new ItemStack(Material.AIR);
     
     public ItemStack item();
     
     public void itemEvent(Player player);
     
-    public Team team(); 
+    public List<Team> team();
     
     
 }

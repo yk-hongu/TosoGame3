@@ -3,15 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tosogame.third.tosogame3.api;
+package com.tosogame.third.tosogame3.api.event;
 
-import org.bukkit.EntityEffect;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
 
 /**
  *
@@ -20,12 +18,13 @@ import org.bukkit.event.entity.EntityDamageEvent;
 public class PlayerTouchByHunterEvent extends Event implements Cancellable {
 
     private static final HandlerList handlers = new HandlerList();
-    private Player toso;
-    private Player hunter;
+    private final Player toso;
+    private final Player hunter;
     private boolean cancell;
-    private EntityDamageEvent event;
+    private final EntityDamageByEntityEvent event;
 
     public PlayerTouchByHunterEvent(EntityDamageByEntityEvent event) {
+        event.setDamage(0);
         this.event = event;
         this.toso = (Player)event.getEntity();
         this.hunter = (Player)event.getDamager();

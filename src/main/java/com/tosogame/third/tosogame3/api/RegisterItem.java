@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.tosogame.third.tosogame3.api;
 
+import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,29 +20,32 @@ import org.bukkit.scoreboard.Team;
  *
  * @author peko
  */
-public class RegisterItem implements Listener{
-    
+public class RegisterItem implements Listener {
+
     TosoItem itemClass;
-    Team team;
+    List<Team> team;
     ItemStack item;
     final int i = 0;
-    
-    public void registerItem(Plugin plugin, TosoItem itemClass){
+
+    public void registerItem(Plugin plugin, TosoItem itemClass) {
         Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
+        this.itemClass = itemClass;
         team = itemClass.team();
         item = itemClass.item();
     }
-    
+
     @EventHandler
-    public void itemEvent(PlayerInteractEvent event){
-        if(event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)){
+    public void itemEvent(PlayerInteractEvent event) {
+        if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             Player player = event.getPlayer();
-            if(player.getItemInHand().getType().equals(item.getType())){
-                if(team.hasPlayer(player)){
-                    itemClass.itemEvent(player);
+            if (player.getItemInHand().getType().equals(item.getType())) {
+                for (Team tm : team) {
+                    if (tm.hasPlayer(player)) {
+                        itemClass.itemEvent(player);
+                    }
                 }
             }
         }
     }
-    
+
 }

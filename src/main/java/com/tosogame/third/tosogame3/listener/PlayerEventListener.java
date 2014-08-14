@@ -5,18 +5,15 @@
  */
 package com.tosogame.third.tosogame3.listener;
 
-import com.tosogame.third.tosogame3.api.HunterBoxOpenEvent;
-import com.tosogame.third.tosogame3.api.PlayerTouchByHunterEvent;
-import com.tosogame.third.tosogame3.api.TosoPlayer;
+import com.tosogame.third.tosogame3.api.event.GameStartEvent;
+import com.tosogame.third.tosogame3.api.event.PlayerTouchByHunterEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.plugin.Plugin;
 
 /**
@@ -40,7 +37,13 @@ public class PlayerEventListener implements Listener {
             String d_team = def.getScoreboard().getPlayerTeam(def).getName();
             if (a_team.equalsIgnoreCase("hunter") && d_team.equalsIgnoreCase("toso")) {
                 event.setDamage(0);
-                Bukkit.getServer().getPluginManager().callEvent(event);
+                PlayerTouchByHunterEvent ev = new PlayerTouchByHunterEvent(event);
+                Bukkit.getServer().getPluginManager().callEvent(new PlayerTouchByHunterEvent(event));
+                if(ev.isCancelled()){
+                    event.setCancelled(true);
+                }else{
+                    
+                }
             } else if (a_team.equalsIgnoreCase(d_team)) {
                 event.setCancelled(true);
             } else if (a_team.equalsIgnoreCase("toso") && d_team.equalsIgnoreCase("hunter")) {
@@ -51,9 +54,14 @@ public class PlayerEventListener implements Listener {
     
     @EventHandler
     public void t32(PlayerJoinEvent event){
-        TosoPlayer tp = new TosoPlayer();
-        tp.joinTosoGame(event.getPlayer());
-        Bukkit.broadcastMessage(""+event.getPlayer().getScoreboard());
+//        TosoPlayer tp = new TosoPlayer();
+//        tp.joinTosoGame(event.getPlayer());
+        Bukkit.broadcastMessage(""+event.getPlayer().getUniqueId());
 //        Bukkit.getServer().getPluginManager().callEvent(new PlayerTouchByHunterEvent(event));
+    }
+    
+    @EventHandler
+    public void t1(GameStartEvent event){
+        
     }
 }

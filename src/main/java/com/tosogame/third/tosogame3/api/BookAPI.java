@@ -31,7 +31,7 @@ public class BookAPI {
      * 「逃走中」というタイトルの本に対してページを追加できます。<br>
      * 汎用性をあげるために、権限による分別はしていません。（この本を持っている人のみが対象。逃走者以外でも可）
      *     
-* @param msg ミッション告知用の本「逃走中」に追加するページ内容
+     * @param msg ミッション告知用の本「逃走中」に追加するページ内容
      */
     public void writeBook(String msg) {
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {

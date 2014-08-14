@@ -1,0 +1,19 @@
+# 説明
+# team.txtでは逃走中のチームを具体的に設定することができます
+# 例）
+# toso : toso1 : yellow
+# toso : toso2 : blue
+# hunter : hunter : red
+# jail : jail : black
+# admin : admin : gold
+#
+# 上記のような場合以下の書式に則ってチームが作成されます
+#
+# 陣営名（toso, hunter, jail, admin） : チーム名 : 色
+#
+# 色に関しては、公式Wikiを参考にしてください
+
+toso : toso : white
+hunter : hunter : red
+jail : jail : black
+admin : admin : gold
